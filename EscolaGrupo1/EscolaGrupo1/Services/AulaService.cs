@@ -47,11 +47,6 @@ namespace EscolaGrupo1.Services
             _aulaRepository.Atualizar(aula);
         }
 
-        public List<Aula> BuscarTodos()
-        {
-            return _aulaRepository.GetAll().Where(x => x.Ativo);
-        }
-
         public Aula BuscarPorId(Guid id)
         {
             return _aulaRepository.BuscarPorId(id);
