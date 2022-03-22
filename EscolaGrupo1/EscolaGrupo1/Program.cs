@@ -1,4 +1,4 @@
-﻿using System;
+﻿using EscolaGrupo1.Services;
 
 namespace EscolaGrupo1
 {
@@ -6,7 +6,7 @@ namespace EscolaGrupo1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MenuService.Iniciar();
         }
     }
 }
