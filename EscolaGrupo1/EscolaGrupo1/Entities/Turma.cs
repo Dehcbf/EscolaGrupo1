@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using EscolaGrupo1.Utils;
 
-namespace EscolaGrupo1.turmas
+namespace EscolaGrupo1.Entities
 {
     public class Turma : BaseEntity
     {
