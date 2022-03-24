@@ -44,7 +44,8 @@ namespace EscolaGrupo1
                     break;
                 case "5":
                     Console.Title = "Menu de Turmas";
-                    
+                    var menuturma = new MenuTurmas();
+                    menuturma.Menu();
                     break;
                 case "0":
                     Environment.Exit(0);
