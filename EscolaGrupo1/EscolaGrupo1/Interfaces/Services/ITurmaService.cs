@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using EscolaGrupo1.Entities;
 
-namespace EscolaGrupo1.turmas
+namespace EscolaGrupo1.Interfaces.Services
 {
     public interface ITurmaService
     {

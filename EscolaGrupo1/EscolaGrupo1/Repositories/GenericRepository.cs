@@ -28,7 +28,7 @@ namespace EscolaGrupo1.Repositories
 
         public List<T> GetAll()
         {
-            return GetDatabase().ToList();
+            return GetDatabase().FindAll(x => x.Ativo == true).ToList();
         }
     }
 }
