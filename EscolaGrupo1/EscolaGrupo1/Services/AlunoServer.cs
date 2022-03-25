@@ -1,5 +1,7 @@
 ﻿using EscolaGrupo1.Entities;
 using EscolaGrupo1.Repositories;
+using System;
+using System.Threading;
 
 namespace EscolaGrupo1.Services
 {
@@ -42,6 +44,6 @@ namespace EscolaGrupo1.Services
             return true;
         }
 
-        private Aluno GetByNome(string nomeAluno) => _alunoRepository.GetByName(nomeAluno);
+        public Aluno GetByNome(string nomeAluno) => _alunoRepository.GetByName(nomeAluno);
     }
 }

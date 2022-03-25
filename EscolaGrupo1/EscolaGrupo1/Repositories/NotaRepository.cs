@@ -1,4 +1,6 @@
 ﻿using EscolaGrupo1.Entities;
+using System.Collections.Generic;
+using System.IO;
 
 namespace EscolaGrupo1.Repositories
 {

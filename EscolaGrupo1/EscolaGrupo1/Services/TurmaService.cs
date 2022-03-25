@@ -15,7 +15,7 @@ namespace EscolaGrupo1.Services
             _turmaRepository = new TurmaRepository();
         }
 
-        public void CadastrarTurma(string nomeTurma, List<string> aulas, List<string> alunos)
+        public void CadastrarTurma(string nomeTurma, List<string> aulas, List<Aluno> alunos)
         {
             //verificar se as aulas existem
             //verificar se os alunos existem

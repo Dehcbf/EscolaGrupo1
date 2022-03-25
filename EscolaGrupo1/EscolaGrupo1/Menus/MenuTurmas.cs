@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using EscolaGrupo1.Repositories;
 using EscolaGrupo1.Services;
 
 namespace EscolaGrupo1.Menus
@@ -51,7 +52,7 @@ namespace EscolaGrupo1.Menus
                     Console.WriteLine("Insira o nome das aulas separado por virgula: ");
                     var aulas = Console.ReadLine().Split(",").ToList();
                     Console.WriteLine("Insira os alunos: ");
-                    var alunos = Console.ReadLine().Split(",").ToList();
+                    var alunos = new AlunoRepository().GetAll().Where(x => Console.ReadLine().Split(",").ToList().Contains(x.Nome)).ToList();
                     service.CadastrarTurma(nome, aulas, alunos);
                     break;
                 case "3":

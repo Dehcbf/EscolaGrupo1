@@ -1,4 +1,6 @@
 ﻿using EscolaGrupo1.Entities;
+using System.IO;
+using System.Linq;
 
 namespace EscolaGrupo1.Repositories
 {
@@ -16,10 +18,10 @@ namespace EscolaGrupo1.Repositories
             UpdateDatabase(database);
         }
 
-        public Turma GetByName(string name)
+        public Aluno GetByName(string name)
         {
             var database = GetDatabase();
-            return database.FirstOrDefault(Aluno => aluno.Nome.Equals(name));
+            return database.FirstOrDefault(Aluno => Aluno.Nome.Equals(name));
         }
     }
 }

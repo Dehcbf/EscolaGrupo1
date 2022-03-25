@@ -13,6 +13,6 @@ namespace EscolaGrupo1.Observer
 
         void Notify();
 
-        void NotiftWithSave();
+        void NotifyWithSave(object toSave);
     }
 }

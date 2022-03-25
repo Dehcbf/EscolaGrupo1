@@ -15,6 +15,9 @@ namespace EscolaGrupo1.Services
         public NotaService()
         {
             _notaRepository = new NotaRepository();
+            _turmaRepository = new TurmaRepository();
+            _alunoRepository = new AlunoRepository();
+            _aulaRepository = new AulaRepository();
         }
 
         private Turma VerificaTurma()

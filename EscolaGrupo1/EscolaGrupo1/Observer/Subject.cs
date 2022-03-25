@@ -1,4 +1,7 @@
-﻿namespace EscolaGrupo1.Observer
+﻿using System;
+using System.Collections.Generic;
+
+namespace EscolaGrupo1.Observer
 {
     public class Subject : ISubject
     {

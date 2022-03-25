@@ -1,14 +1,15 @@
 ﻿using EscolaGrupo1.Entities;
 using EscolaGrupo1.Services;
 using EscolaGrupo1.Observer;
+using System;
 
 namespace EscolaGrupo1.Menus
 {
-    public class MenuAula
+    public class MenuAluno
     {
         private readonly TurmaService _turmaService;
 
-        public MenuAula()
+        public MenuAluno()
         {
             _turmaService = new TurmaService();
         }
@@ -33,7 +34,7 @@ namespace EscolaGrupo1.Menus
 
                     Console.WriteLine($"Forneça a turma do Aluno: ");
                     var turmasA = _turmaService.GetTurmas();
-                    turmasA.ForEach(turma => Console.WriteLine(turma.GetNome()));
+                    turmasA.ForEach(turma => Console.WriteLine(turma.Nome));
                     var turmaNameA = Console.ReadLine();
 
                     var turmaDataA = _turmaService.GetByName(turmaNameA);
@@ -47,7 +48,7 @@ namespace EscolaGrupo1.Menus
                     Console.WriteLine($"Forneça o nome do aluno: ");
                     //var subject = new Subject();
                     var nomeAlunoB = Console.ReadLine();
-                    var alunoB = AlunoServer.GetByNome(nomeAlunoB);
+                    var alunoB = new AlunoServer().GetByNome(nomeAlunoB);
 
                     var turmaDataB = _turmaService.GetByAlunoName(alunoB);
                     //subject.Attach(turmaDataB);
