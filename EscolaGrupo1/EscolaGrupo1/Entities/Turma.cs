@@ -6,15 +6,15 @@ namespace EscolaGrupo1.Entities
 {
     public class Turma : BaseEntity
     {
-        public Turma(string nome, List<Guid> aulas, List<Guid> alunos)
+        public Turma(string nome, List<string> aulas, List<string> alunos)
         {
             Nome = nome;
             Ativo = true;
-            IdAula = aulas;
-            IdAluno = alunos;
+            Aulas = aulas;
+            Alunos = alunos;
         }
-        public List<Guid> IdAula { get; set; }
-        public List<Guid> IdAluno { get; set; }
+        public List<string> Aulas { get; set; }
+        public List<string> Alunos { get; set; }
         public string Nome { get; set; }
     }
 }

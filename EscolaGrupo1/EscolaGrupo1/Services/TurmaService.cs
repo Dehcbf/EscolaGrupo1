@@ -8,15 +8,22 @@ namespace EscolaGrupo1.Services
 {
     public class TurmaService : GenericRepository<Turma>
     {
+        private readonly TurmaRepository _turmaRepository;
         public TurmaService()
         {
-            Host = Directory.GetCurrentDirectory() + @"\Database\turma.json";
+            Host = Directory.GetCurrentDirectory() + @"\..\..\..\Database\turma.json";
+            _turmaRepository = new TurmaRepository();
         }
 
-        public void CadastrarTurma(string nomeTurma, List<Guid> IdAula, List<Guid> IdAluno)
+        public void CadastrarTurma(string nomeTurma, List<string> aulas, List<string> alunos)
         {
-            throw new NotImplementedException();
+            //verificar se as aulas existem
+            //verificar se os alunos existem
+            if (true)
+                _turmaRepository.Create(new Turma(nomeTurma, aulas, alunos));
+            else
+                Console.WriteLine("Informações inválidas");
         }
-
+     
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using EscolaGrupo1.Entities;
 using EscolaGrupo1.Professores.Service;
 
@@ -16,6 +17,7 @@ namespace EscolaGrupo1.Menus
             Console.WriteLine("2. Cadastrar Professor");
             Console.WriteLine("3. Atualizar Professor");
             Console.WriteLine("4. Excluir Professor");
+            Console.WriteLine("5. Marcar Presenças");
             Console.WriteLine("0. Sair");
             Console.Write("Opção: ");
             switch (Console.ReadLine())
@@ -40,7 +42,14 @@ namespace EscolaGrupo1.Menus
                     var email = Console.ReadLine();
                     Console.WriteLine("Insira a matéria do professor: ");
                     var materia = Console.ReadLine();
-                    service.CadastrarProfessor(new Professor(nome, email, materia, Guid.NewGuid()));
+                    service.CadastrarProfessor(new Professor{
+                        Nome = nome, 
+                        Email = email,
+                        Materia = materia,
+                        Id = Guid.NewGuid(),
+                        Ativo = true,
+                        Presencas = new List<Presenca>()
+                    });
                     break;
                 case "3":
                     Console.Title = "Atualização de Professores";
@@ -50,6 +59,24 @@ namespace EscolaGrupo1.Menus
                     Console.Title = "Exclusão de Professores";
                     Console.WriteLine("Insira o e-mail do professor a ser excluído: ");
                     service.ExcluirProfessor(Console.ReadLine());
+                    break;
+                case "5":
+                    Console.Title = "Marcar Presenças";
+                    Console.WriteLine("Insira o e-mail do professor que irá marcar as presenças: ");
+                    var emailProfessor = Console.ReadLine();
+                    Console.WriteLine("Insira a turma que receberá presenças: ");
+                    var turma = Console.ReadLine();
+                    Console.WriteLine("Insira a data da aula: ");
+                    var dataAula = Console.ReadLine();
+                    Console.WriteLine("Insira a quantidade de alunos presentes: ");
+                    var qtdAlunos = Convert.ToInt32(Console.ReadLine());
+                    var alunos = new List<string>();
+                    for (int i = 0; i < qtdAlunos; i++)
+                    {
+                        Console.WriteLine("Nome do aluno: ");
+                        alunos.Add(Console.ReadLine());
+                    }
+                    service.MarcarPresencas(emailProfessor, turma, dataAula, alunos);
                     break;
                 case "0":
                     return;
