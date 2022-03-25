@@ -42,7 +42,8 @@ namespace EscolaGrupo1
                     break;
                 case "4":
                     Console.Title = "Menu de Notas";
-                    
+                    var menuNotas = new MenuNota();
+                    menuNotas.Menu();
                     break;
                 case "5":
                     Console.Title = "Menu de Turmas";

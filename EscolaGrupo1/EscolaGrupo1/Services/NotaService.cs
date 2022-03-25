@@ -10,6 +10,7 @@ namespace EscolaGrupo1.Services
         private NotaRepository _notaRepository;
         private AulaRepository _aulaRepository;
         private AlunoRepository _alunoRepository;
+        private TurmaRepository _turmaRepository;
 
         public NotaService()
         {
@@ -26,8 +27,8 @@ namespace EscolaGrupo1.Services
         private Aula VerificaAula()
         {
             Console.Write("Digite qual a aula: ");
-            var materiaAula = Console.ReadLine();
-            return _aulaRepository.ProcurarAula(materiaAula);
+            var materiaAula = Guid.Parse(Console.ReadLine());
+            return _aulaRepository.BuscarPorId(materiaAula);
         }
 
         private Aluno VerificaAluno()
