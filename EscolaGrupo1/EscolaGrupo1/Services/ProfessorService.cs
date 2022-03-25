@@ -57,7 +57,14 @@ namespace EscolaGrupo1.Professores.Service
             }
             else
             {
-                _professorRepository.Cadastrar(new Professor(professor.Nome, professor.Email, professor.Materia, Guid.NewGuid()));
+                _professorRepository.Cadastrar(new Professor{
+                    Nome = professor.Nome, 
+                    Email = professor.Email,
+                    Materia = professor.Materia,
+                    Id = Guid.NewGuid(),
+                    Ativo = true,
+                    Presencas = new List<Presenca>()
+                });
                 Console.WriteLine("Professor cadastrado com sucesso");
             }
         }
@@ -90,7 +97,16 @@ namespace EscolaGrupo1.Professores.Service
             var materiaProfessor = Console.ReadLine();
 
             _professorRepository.Deletar(indexProfessor);
-            _professorRepository.Cadastrar(new Professor(nomeProfessor, emailProfessor, materiaProfessor, professor.Id));
+            _professorRepository.Cadastrar(new Professor{
+                    Nome = nomeProfessor, 
+                    Email = emailProfessor,
+                    Materia = materiaProfessor,
+                    Id = professor.Id,
+                    Ativo = true,
+                    Presencas = professor.Presencas
+                });
+
+            Console.WriteLine("Professor atualizado com sucesso");
         }
 
         public void ExcluirProfessor(string email)
@@ -100,6 +116,40 @@ namespace EscolaGrupo1.Professores.Service
             var professorDeletar = _professorRepository.GetAll().FindIndex(x => x.Email == email);
             _professorRepository.Deletar(professorDeletar);
             _professorRepository.Cadastrar(professor);
+            
+            Console.WriteLine("Professor excluído com sucesso");
+        }
+
+        public void MarcarPresencas(string emailProfessor, string turma, string dataAula, List<string> alunos){
+            var professorBanco = _professorRepository.ObterTodos().Find(x => x.Email == emailProfessor);
+            
+            if (professorBanco is null)
+            {
+                Console.WriteLine("E-mail do professor não encontrado");
+                return;
+            }
+
+            var indexProfessor = _professorRepository.ObterTodos().FindIndex(x => x.Email == professorBanco.Email);
+            _professorRepository.Deletar(indexProfessor);
+
+            var presencas = professorBanco.Presencas;
+            var presenca = new Presenca{
+                Turma = turma,
+                DataAula = dataAula,
+                AlunosPresentes = alunos
+            };
+            presencas.Add(presenca);
+
+            _professorRepository.Cadastrar(new Professor{
+                Id = professorBanco.Id,
+                Ativo = true,
+                Email = emailProfessor,
+                Materia = professorBanco.Materia,
+                Nome = professorBanco.Nome,
+                Presencas = presencas
+            });
+
+            Console.WriteLine($"Presenças marcadas com sucesso para o dia {dataAula}");
         }
     }
 }
