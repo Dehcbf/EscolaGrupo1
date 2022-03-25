@@ -24,6 +24,13 @@ namespace EscolaGrupo1.Services
             else
                 Console.WriteLine("Informações inválidas");
         }
-     
+
+        public void AtualizarTurma(Turma turmaAtualizada) => _turmaRepository.AtualizarTurma(turmaAtualizada);
+
+        public Turma GetByName(string name) => _turmaRepository.GetByName(name);
+
+        public List<Turma> GetTurmas() => _turmaRepository.GetAll();
+
+        public Turma GetByAlunoName(Aluno aluno) => _turmaRepository.GetByAlunoName(aluno);
     }
 }
