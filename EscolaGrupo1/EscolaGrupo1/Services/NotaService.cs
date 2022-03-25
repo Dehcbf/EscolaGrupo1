@@ -20,7 +20,7 @@ namespace EscolaGrupo1.Services
         private Turma VerificaTurma()
         {
             Console.Write("Digite o nome da turma: ");
-            var identificadorTurma = int.Parse(Console.ReadLine());
+            var identificadorTurma = Console.ReadLine();
             return _turmaRepository.ProcurarTurma(identificadorTurma);
         }
 
