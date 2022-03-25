@@ -12,7 +12,6 @@ namespace EscolaGrupo1
 
         public static void StartMenu()
         {
-            Console.ReadLine();
             Console.Title = "Escola Grupo 1";
             Console.WriteLine("SISTEMA DE ESCOLA");
             Console.WriteLine("Escolha um dos menus a seguir: ");
@@ -30,13 +29,16 @@ namespace EscolaGrupo1
                     
                     break;
                 case "2":
+                    Console.Clear();
                     Console.Title = "Menu de Professores";
                     var menuProfessor = new MenuProfessor();
                     menuProfessor.Menu();
                     break;
                 case "3":
+                    Console.Clear();
                     Console.Title = "Menu de Aulas";
-                    
+                    var menuAula = new MenuAula();
+                    menuAula.Menu();
                     break;
                 case "4":
                     Console.Title = "Menu de Notas";

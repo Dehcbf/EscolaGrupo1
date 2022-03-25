@@ -5,18 +5,13 @@ namespace EscolaGrupo1.Entities
 {
     public class Aula : BaseEntity
     {
-        private string NomeMateria { get; set; }
-        private Guid ProfessorId { get; set; }
+        public string NomeMateria { get; private set; }
+        public Guid ProfessorId { get; set; }
 
         public Aula(string nomeMateria)
         {
             Id = Guid.NewGuid();
             NomeMateria = nomeMateria;
-        }
-
-        public void AlocarProfessor(Guid professorId)
-        {
-            ProfessorId = professorId;
         }
 
         public void Atualizar(string nomeMateria)

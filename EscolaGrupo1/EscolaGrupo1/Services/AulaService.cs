@@ -10,164 +10,118 @@ namespace EscolaGrupo1.Services
     public class AulaService : IAulaService
     {
         private readonly AulaRepository _aulaRepository;
-        //private readonly ProfessorRepository _professorRepository;
+        private readonly ProfessorRepository _professorRepository;
         private List<string> _erros;
 
         public AulaService()
         {
             _aulaRepository = new AulaRepository();
-            //_professorRepository = new ProfessorRepository();
+            _professorRepository = new ProfessorRepository();
             _erros = new List<string>();
         }
 
-        public void Cadastrar()
+        public Guid Cadastrar(string nomeMateria)
         {
-            Console.Clear();
-            Console.WriteLine("Cadastro de Aulas");
-            var nomeMateria = "";
+            if(string.IsNullOrWhiteSpace(nomeMateria))
+                _erros.Add("Nome da Matéria não pode estar vazio.");
 
-            do
-            {
-                _erros.Clear();
+            if (VerificarErros())
+                return Guid.Empty;
 
-                Console.Write("\nNome da Matéria: ");
-                nomeMateria = Console.ReadLine();
-
-                if(string.IsNullOrWhiteSpace(nomeMateria))
-                    _erros.Add("Nome da Matéria não pode estar vazio.");
-
-            }
-            while(_erros.Any());
-
-            _aulaRepository.Cadastrar(new Aula(nomeMateria));
+            var aula = new Aula(nomeMateria);
+            _aulaRepository.Cadastrar(aula);
+            return aula.Id;
         }
 
-        public void Atualizar()
+        public void Atualizar(Guid aulaId, string nomeMateria)
         {
-            Console.Clear();
-            Console.WriteLine("Atualização de Aulas");
-            Aula aula;
-            var nomeMateria = "";
-
-            do
+            if(aulaId == default)
             {
-                _erros.Clear();
-
-                Console.Write("\nId da aula: ");
-                var id = Guid.Parse(Console.ReadLine());
-
-                Console.Write("\nNome da Matéria: ");
-                nomeMateria = Console.ReadLine();
-
-                aula = _aulaRepository.BuscarPorId(id);
-
-                if(aula == null)
-                    _erros.Add("Aula não encontrada.");
-
-                if(string.IsNullOrWhiteSpace(nomeMateria))
-                    _erros.Add("O Nome da Matéria não pode estar vazio.");
-
+                Console.WriteLine("Id da aula inválido.");
+                return;
             }
-            while(_erros.Any());
-            
+
+            var aula = _aulaRepository.BuscarPorId(aulaId);
+
+            if(aula == null)
+                _erros.Add("Aula não encontrada.");
+
+            if(string.IsNullOrWhiteSpace(nomeMateria))
+                _erros.Add("O Nome da Matéria não pode estar vazio.");
+
+            if(VerificarErros())
+                return;
+
             aula.Atualizar(nomeMateria);
             _aulaRepository.Atualizar(aula);
         }
 
-        public Aula BuscarPorId()
+        public Aula BuscarPorId(Guid aulaId)
         {
-            Console.Clear();
-            Console.WriteLine("Buscar Aula");
-            Aula aula;
-            Guid id;
-
-            do
-            {
-                _erros.Clear();
-
-                Console.Write("\nId da aula: ");
-                id = Guid.Parse(Console.ReadLine());
-
-                aula = _aulaRepository.BuscarPorId(id);
-
-                if(aula == null)
-                    _erros.Add("Aula não encontrada.");
-
-            }
-            while(_erros.Any());
-
-            return aula;
+            return _aulaRepository.BuscarPorId(aulaId);
         }
 
-        public void Deletar()
+        public List<Aula> BuscarTodos()
         {
-            Console.Clear();
-            Console.WriteLine("Buscar Aula");
-            Aula aula;
-            Guid id;
+            return _aulaRepository.GetAll().Where(x => x.Ativo).ToList();
+        }
 
-            do
+        public void Deletar(Guid aulaId)
+        {
+            if(aulaId == default)
             {
-                _erros.Clear();
-
-                Console.Write("\nId da aula: ");
-                id = Guid.Parse(Console.ReadLine());
-
-                aula = _aulaRepository.BuscarPorId(id);
-
-                if(aula == null)
-                    _erros.Add("Aula não encontrada.");
-                    
+                Console.WriteLine("Id da aula inválido.");
+                return;
             }
-            while(_erros.Any());
-            
+
+            var aula = _aulaRepository.BuscarPorId(aulaId);
+
+            if(aula == null)
+                _erros.Add("Aula não encontrada.");
+
+            if(VerificarErros())
+                return;
+
             aula.Ativo = false;
             _aulaRepository.Atualizar(aula);
         }
 
-        public void AlocarProfessor()
+        public void AlocarProfessor(Guid aulaId, Guid professorId)
         {
-            Console.Clear();
-            Console.WriteLine("Buscar Aula");
-            Aula aula;
-            Guid aulaId;
-            Guid professorId;
-
-            do
+            if(aulaId == default)
             {
-                _erros.Clear();
-
-                Console.Write("\nId da aula: ");
-                aulaId = Guid.Parse(Console.ReadLine());
-
-                Console.Write("\nId do professor: ");
-                professorId = Guid.Parse(Console.ReadLine());
-
-                aula = _aulaRepository.BuscarPorId(aulaId);
-                //var professor = _professorRepository.BuscarPorId(professorId);
-
-                if(aula == null)
-                    _erros.Add("Aula não encontrada.");
-                
-                // if(professor == null)
-                //     _erros.Add("Professor não encontrado.");
+                if(professorId == default)
+                    Console.WriteLine("Id do professor inválido.");
                     
+                Console.WriteLine("Id da aula inválido.");
+                return;
             }
-            while(_erros.Any());
+
+            var aula = _aulaRepository.BuscarPorId(aulaId);
+            var professor = _professorRepository.ObterTodos().Find(x => x.Id == professorId);
+
+            if(aula == null)
+                _erros.Add("Aula não encontrada.");
+                
+            if(professor == null)
+                _erros.Add("Professor não encontrado.");
+                    
+            if(VerificarErros())
+                return;
             
-            aula.AlocarProfessor(professorId);
+            aula.ProfessorId = professorId;
             _aulaRepository.Atualizar(aula);
         }
 
-        // private bool VerificarErros()
-        // {
-        //     if(_erros.Any())
-        //     {
-        //         _erros.ForEach(x => Console.WriteLine(x));
-        //         return true;
-        //     }
+        private bool VerificarErros()
+        {
+            if (_erros.Any())
+            {
+                _erros.ForEach(x => Console.WriteLine(x));
+                return true;
+            }
 
-        //     return false;
-        // }
+            return false;
+        }
     }
 }

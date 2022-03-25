@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using EscolaGrupo1.Entities;
 
 namespace EscolaGrupo1.Interfaces.Services
 {
     public interface IAulaService
     {
-        void Cadastrar();
-        void Atualizar();
-        Aula BuscarPorId();
-        void Deletar();
-        void AlocarProfessor();
+        Guid Cadastrar(string nomeMateria);
+        void Atualizar(Guid aulaId, string nomeMateria);
+        List<Aula> BuscarTodos();
+        Aula BuscarPorId(Guid aulaId);
+        void Deletar(Guid aulaId);
+        void AlocarProfessor(Guid aulaId, Guid professorId);
     }
 }
