@@ -1,12 +1,12 @@
 ﻿using EscolaGrupo1.Entities;
 using EscolaGrupo1.Repositories;
-using EscolaGrupo1.turmas;
 using System;
 
 namespace EscolaGrupo1.Services
 {
     public class NotaService
     {
+        // TODO: REMOVER OS COMENTARIOS DEPOIS DA IMPLEMENTAÇÃO DO REPOSITORY DE ALUNO!!!!!
         private NotaRepository _notaRepository;
         private AulaRepository _aulaRepository;
         private AlunoRepository _alunoRepository;
@@ -31,12 +31,12 @@ namespace EscolaGrupo1.Services
             return _aulaRepository.BuscarPorId(materiaAula);
         }
 
-        private Aluno VerificaAluno()
-        {
-            Console.Write("Digite o nome do aluno: ");
-            var nomeAluno = Console.ReadLine();
-            return _alunoRepository.BuscarAluno(nomeAluno);
-        }
+        //private Aluno VerificaAluno()
+        //{
+        //    Console.Write("Digite o nome do aluno: ");
+        //    var nomeAluno = Console.ReadLine();
+        //    return _alunoRepository.BuscarAluno(nomeAluno);
+        //}
 
         public bool CadastrarNota()
         {
@@ -56,18 +56,18 @@ namespace EscolaGrupo1.Services
                 return false;
             }
 
-            var resultadoAluno = VerificaAluno();
-            if (resultadoAluno is null)
-            {
-                Console.WriteLine("Aluno(a) não encontrado.");
-                return false;
-            }
+            //var resultadoAluno = VerificaAluno();
+            //if (resultadoAluno is null)
+            //{
+            //    Console.WriteLine("Aluno(a) não encontrado.");
+            //    return false;
+            //}
 
-            Console.Write($"Digite a nota do aluno(a) {resultadoAluno.Nome}: ");
-            var notaAluno = double.Parse(Console.ReadLine());
+            //Console.Write($"Digite a nota do aluno(a) {resultadoAluno.Nome}: ");
+            //var notaAluno = double.Parse(Console.ReadLine());
 
-            Nota nota = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAluno);
-            _notaRepository.Criar(nota);
+            //Nota nota = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAluno);
+            //_notaRepository.Criar(nota);
 
             return true;
         }
@@ -89,35 +89,35 @@ namespace EscolaGrupo1.Services
                 return false;
             }
 
-            var resultadoAluno = VerificaAluno();
-            if (resultadoAluno is null)
-            {
-                Console.WriteLine("Aluno(a) não encontrado.");
-                return false;
-            }
+            //var resultadoAluno = VerificaAluno();
+            //if (resultadoAluno is null)
+            //{
+            //    Console.WriteLine("Aluno(a) não encontrado.");
+            //    return false;
+            //}
 
-            var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
-            if (resultadoAlunoNota is null)
-            {
-                Console.WriteLine("Aluno não possui notas.");
-                return false;
-            }
+            //var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
+            //if (resultadoAlunoNota is null)
+            //{
+            //    Console.WriteLine("Aluno não possui notas.");
+            //    return false;
+            //}
 
-            Console.WriteLine("Notas");
-            foreach (var aluno in resultadoAlunoNota)
-            {
-                Console.WriteLine($"{aluno.NotaAluno}");
-            }
+            //Console.WriteLine("Notas");
+            //foreach (var aluno in resultadoAlunoNota)
+            //{
+            //    Console.WriteLine($"{aluno.NotaAluno}");
+            //}
 
             Console.WriteLine("Digite a nota que será atualizada: ");
             var notaAntiga = double.Parse(Console.ReadLine());
             Console.WriteLine("Digite a nova nota: ");
             var notaAtualizada = double.Parse(Console.ReadLine());
 
-            Nota notaDeletada = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAntiga);
-            _notaRepository.Deletar(notaDeletada);
-            Nota notaNova = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAtualizada);
-            _notaRepository.Criar(notaNova);
+            //Nota notaDeletada = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAntiga);
+            //_notaRepository.Deletar(notaDeletada);
+            //Nota notaNova = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaAtualizada);
+            //_notaRepository.Criar(notaNova);
 
             return true;
         }
@@ -139,31 +139,31 @@ namespace EscolaGrupo1.Services
                 return false;
             }
 
-            var resultadoAluno = VerificaAluno();
-            if (resultadoAluno is null)
-            {
-                Console.WriteLine("Aluno(a) não encontrado.");
-                return false;
-            }
+            //var resultadoAluno = VerificaAluno();
+            //if (resultadoAluno is null)
+            //{
+            //    Console.WriteLine("Aluno(a) não encontrado.");
+            //    return false;
+            //}
 
-            var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
-            if (resultadoAlunoNota is null)
-            {
-                Console.WriteLine("Aluno não possui notas.");
-                return false;
-            }
+            //var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
+            //if (resultadoAlunoNota is null)
+            //{
+            //    Console.WriteLine("Aluno não possui notas.");
+            //    return false;
+            //}
 
-            Console.WriteLine("Notas");
-            foreach (var aluno in resultadoAlunoNota)
-            {
-                Console.WriteLine($"{aluno.NotaAluno}");
-            }
+            //Console.WriteLine("Notas");
+            //foreach (var aluno in resultadoAlunoNota)
+            //{
+            //    Console.WriteLine($"{aluno.NotaAluno}");
+            //}
 
             Console.WriteLine("Digite a nota que será deletada: ");
             var notaDeletada = double.Parse(Console.ReadLine());
 
-            Nota nota = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaDeletada);
-            _notaRepository.Deletar(nota);
+            //Nota nota = new(resultadoTurma.Nome, resultadoMateriaAula.NomeMateria, resultadoAluno.Nome, notaDeletada);
+            //_notaRepository.Deletar(nota);
 
             return true;
         }
@@ -185,25 +185,25 @@ namespace EscolaGrupo1.Services
                 return false;
             }
 
-            var resultadoAluno = VerificaAluno();
-            if (resultadoAluno is null)
-            {
-                Console.WriteLine("Aluno(a) não encontrado.");
-                return false;
-            }
+            //var resultadoAluno = VerificaAluno();
+            //if (resultadoAluno is null)
+            //{
+            //    Console.WriteLine("Aluno(a) não encontrado.");
+            //    return false;
+            //}
 
-            var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
-            if (resultadoAlunoNota is null)
-            {
-                Console.WriteLine("Aluno não possui notas.");
-                return false;
-            }
+            //var resultadoAlunoNota = _notaRepository.VerNotaPeloNomeAluno(resultadoAluno.Nome);
+            //if (resultadoAlunoNota is null)
+            //{
+            //    Console.WriteLine("Aluno não possui notas.");
+            //    return false;
+            //}
 
-            Console.WriteLine($"Notas do aluno {resultadoAluno.Nome}");
-            foreach (var aluno in resultadoAlunoNota)
-            {
-                Console.WriteLine($"{aluno.NotaAluno}");
-            }
+            //Console.WriteLine($"Notas do aluno {resultadoAluno.Nome}");
+            //foreach (var aluno in resultadoAlunoNota)
+            //{
+            //    Console.WriteLine($"{aluno.NotaAluno}");
+            //}
 
             return true;
         }
