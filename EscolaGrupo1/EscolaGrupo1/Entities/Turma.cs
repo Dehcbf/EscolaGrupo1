@@ -35,5 +35,13 @@ namespace EscolaGrupo1.Entities
             var aluno = (Aluno)subject.GetProcess().First();
             Alunos.Remove(aluno);
         }
+
+        public void ToList()
+        {
+            Console.WriteLine(Nome);
+            Console.WriteLine(Ativo);
+            Console.WriteLine(Aulas);
+            Console.WriteLine(Alunos);
+        }
     }
 }

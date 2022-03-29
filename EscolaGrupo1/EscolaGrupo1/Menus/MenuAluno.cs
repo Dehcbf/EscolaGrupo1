@@ -46,14 +46,14 @@ namespace EscolaGrupo1.Menus
                     Console.Title = "Remover de Aluno";
                     Console.WriteLine("--------------------------------------------");
                     Console.WriteLine($"Forneça o nome do aluno: ");
-                    //var subject = new Subject();
+                    var subject = new Subject();
                     var nomeAlunoB = Console.ReadLine();
                     var alunoB = new AlunoServer().GetByNome(nomeAlunoB);
 
                     var turmaDataB = _turmaService.GetByAlunoName(alunoB);
-                    //subject.Attach(turmaDataB);
-                    turmaDataB.RemoveAluno(alunoB);
-                    
+                    subject.Attach(turmaDataB);
+                    //turmaDataB.RemoveAluno(alunoB);
+                    subject.NotifyWithSave(alunoB);
                     _turmaService.AtualizarTurma(turmaDataB);
                     Console.WriteLine($"Turma atualizada com sucesso: ");
                     break;

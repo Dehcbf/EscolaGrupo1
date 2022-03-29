@@ -11,7 +11,7 @@ namespace EscolaGrupo1.Repositories
     {
         public AulaRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\aula.json";
+            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\aula.json";
         }
 
          public void Cadastrar(Aula aula)

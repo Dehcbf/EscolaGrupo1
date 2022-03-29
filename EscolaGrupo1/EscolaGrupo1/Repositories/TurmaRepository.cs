@@ -1,6 +1,7 @@
 ﻿using EscolaGrupo1.Entities;
 using System.IO;
 using System.Linq;
+using System;
 
 namespace EscolaGrupo1.Repositories
 {
@@ -8,7 +9,7 @@ namespace EscolaGrupo1.Repositories
     {
         public TurmaRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\turma.json";
+            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\turma.json";
         }
 
         public void Create(Turma turma)
@@ -32,6 +33,7 @@ namespace EscolaGrupo1.Repositories
 
         public void AtualizarTurma(Turma turma)
         {
+            Console.WriteLine(turma);
             var database = GetDatabase().ToList();
             var index = database.FindIndex(x => x.Nome == turma.Nome);
             database[index] = turma;

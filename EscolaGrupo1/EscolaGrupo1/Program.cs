@@ -26,7 +26,8 @@ namespace EscolaGrupo1
             {
                 case "1":
                     Console.Title = "Menu de Alunos";
-                    
+                    var menuAluno = new MenuAluno();
+                    menuAluno.Menu();
                     break;
                 case "2":
                     Console.Clear();

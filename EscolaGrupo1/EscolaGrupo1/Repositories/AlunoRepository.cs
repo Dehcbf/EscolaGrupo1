@@ -8,7 +8,7 @@ namespace EscolaGrupo1.Repositories
     {
         public AlunoRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\alunos.json";
+            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\alunos.json";
         }
 
         public void Create(Aluno aluno)
