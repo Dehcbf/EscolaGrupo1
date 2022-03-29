@@ -8,7 +8,7 @@ namespace EscolaGrupo1.Repositories
     {
         public AlunoRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\alunos.json";
+            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\alunos.json";
         }
 
         public void Create(Aluno aluno)
@@ -22,6 +22,16 @@ namespace EscolaGrupo1.Repositories
         {
             var database = GetDatabase();
             return database.FirstOrDefault(Aluno => Aluno.Nome.Equals(name));
+        }
+        public void Delete(int indexAluno)
+        {
+
+            var database = GetDatabase();
+
+            database.RemoveAt(indexAluno);
+
+            UpdateDatabase(database);
+
         }
     }
 }

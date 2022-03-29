@@ -1,6 +1,6 @@
 ﻿using EscolaGrupo1.Entities;
-using EscolaGrupo1.Services;
 using EscolaGrupo1.Observer;
+using EscolaGrupo1.Services;
 using System;
 
 namespace EscolaGrupo1.Menus
@@ -8,10 +8,12 @@ namespace EscolaGrupo1.Menus
     public class MenuAluno
     {
         private readonly TurmaService _turmaService;
+        private readonly AlunoServer _alunoService;
 
         public MenuAluno()
         {
             _turmaService = new TurmaService();
+            _alunoService = new AlunoServer();
         }
 
         public void Menu()
@@ -27,37 +29,43 @@ namespace EscolaGrupo1.Menus
             {
                 case "1":
                     Console.Title = "Criacao de Aluno";
-                    Console.WriteLine("--------------------------------------------");
                     Console.WriteLine($"Forneça o nome do aluno: ");
+
                     var nomeAlunoA = Console.ReadLine();
                     var alunoA = new Aluno(nomeAlunoA);
 
                     Console.WriteLine($"Forneça a turma do Aluno: ");
+
                     var turmasA = _turmaService.GetTurmas();
                     turmasA.ForEach(turma => Console.WriteLine(turma.Nome));
                     var turmaNameA = Console.ReadLine();
+                    _alunoService.CadastroAluno(alunoA);
 
                     var turmaDataA = _turmaService.GetByName(turmaNameA);
                     turmaDataA.InserirAluno(alunoA);
                     _turmaService.AtualizarTurma(turmaDataA);
-                    Console.WriteLine($"Turma atualizada com sucesso: ");
+
+                    Console.WriteLine($"Turma atualizada com sucesso");
                     break;
                 case "2":
                     Console.Title = "Remover de Aluno";
-                    Console.WriteLine("--------------------------------------------");
                     Console.WriteLine($"Forneça o nome do aluno: ");
+
                     var subject = new Subject();
                     var nomeAlunoB = Console.ReadLine();
-                    var alunoB = new AlunoServer().GetByNome(nomeAlunoB);
+                    var alunoB = _alunoService.GetByNome(nomeAlunoB);
 
                     var turmaDataB = _turmaService.GetByAlunoName(alunoB);
-                    subject.Attach(turmaDataB);
-                    //turmaDataB.RemoveAluno(alunoB);
-                    subject.NotifyWithSave(alunoB);
-                    _turmaService.AtualizarTurma(turmaDataB);
-                    Console.WriteLine($"Turma atualizada com sucesso: ");
-                    break;
 
+                    subject.Attach(turmaDataB);
+                    subject.NotifyWithSave(alunoB);
+
+                    _turmaService.AtualizarTurma(turmaDataB);
+                    _alunoService.ExcluirAluno(nomeAlunoB);
+
+                    Console.WriteLine($"Turma atualizada com sucesso");
+
+                    break;
                 case "0":
                     return;
                 default:

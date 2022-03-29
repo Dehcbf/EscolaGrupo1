@@ -8,7 +8,7 @@ namespace EscolaGrupo1.Repositories
     {
         public NotaRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\notas.json";
+            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\notas.json";
         }
 
         public void Criar(Nota nota)

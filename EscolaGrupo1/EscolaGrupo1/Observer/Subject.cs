@@ -41,7 +41,7 @@ namespace EscolaGrupo1.Observer
 
         public List<object> GetProcess()
         {
-            var cloneProcess = _toProcess;
+            var cloneProcess = new List<object>(_toProcess);
             _toProcess.Clear();
             return cloneProcess;
         }

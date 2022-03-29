@@ -9,7 +9,7 @@ namespace EscolaGrupo1.Repositories
     {
         public TurmaRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @".\..\EscolaGrupo1\Database\turma.json";
+            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\turma.json";
         }
 
         public void Create(Turma turma)
