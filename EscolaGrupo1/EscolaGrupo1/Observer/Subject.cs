@@ -31,10 +31,8 @@ namespace EscolaGrupo1.Observer
         public void Notify()
         {
             Console.WriteLine("Subject: Notifying observers...");
-            Console.WriteLine(_observers.Count);
             foreach (var observer in _observers)
             {
-                ((Turma)observer).ToList();
                 observer.Update(this);
             }
         }

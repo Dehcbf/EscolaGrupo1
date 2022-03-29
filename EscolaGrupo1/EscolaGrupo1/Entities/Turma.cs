@@ -31,18 +31,9 @@ namespace EscolaGrupo1.Entities
 
         public void Update(ISubject subject)
         {
-            Console.WriteLine("SISTEMA DE ESCOLA");
             var alunos = subject.GetProcess();
             var aluno = alunos.First();
             Alunos.Remove((Aluno)aluno);
-        }
-
-        public void ToList()
-        {
-            Console.WriteLine(Nome);
-            Console.WriteLine(Ativo);
-            Console.WriteLine(Aulas);
-            Console.WriteLine(Alunos);
         }
     }
 }
