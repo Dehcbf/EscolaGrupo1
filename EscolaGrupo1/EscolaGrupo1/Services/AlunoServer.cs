@@ -14,22 +14,23 @@ namespace EscolaGrupo1.Services
             _alunoRepository = new AlunoRepository();
         }
 
-        public void CadastroAluno()
+        public void CadastroAluno(Aluno aluno)
         {
-            Console.Clear();
-            Console.WriteLine("Cadastro de Alunoss\n");
-            Console.Write("Nome: ");
-            var nome = Console.ReadLine();
-
-            while (!ValidacaoDeNome(nome))
-            {
-                Console.Write("Nome: ");
-                nome = Console.ReadLine();
-            }
-            var aluno = new Aluno(nome);
-
             _alunoRepository.Create(aluno);
         }
+
+        public void ExcluirAluno(string nome)
+        {
+            var aluno = _alunoRepository.GetAll().Find(x => x.Nome == nome);
+            aluno.Ativo = false;
+            var alunoDeletar = _alunoRepository.GetAll().FindIndex(x => x.Nome == nome);
+
+            _alunoRepository.Delete(alunoDeletar);
+            _alunoRepository.Create(aluno);
+
+            Console.WriteLine("Aluno excluído com sucesso");
+        }
+
 
         private static bool ValidacaoDeNome(string nome)
         {
@@ -43,5 +44,7 @@ namespace EscolaGrupo1.Services
 
             return true;
         }
+
+        public Aluno GetByNome(string nomeAluno) => _alunoRepository.GetByName(nomeAluno);
     }
 }

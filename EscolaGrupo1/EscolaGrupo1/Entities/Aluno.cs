@@ -11,5 +11,19 @@ namespace EscolaGrupo1.Entities
         }
 
         public string Nome { get; set; }
+
+        public void DesativarAluno()
+        {
+            Ativo = false;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || obj.GetType() != typeof(Aluno))
+                return false;
+
+            var other = obj as Aluno;
+            return Nome == other.Nome && Ativo == other.Ativo;
+        }
     }
 }

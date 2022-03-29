@@ -8,7 +8,7 @@ namespace EscolaGrupo1.Repositories
     {
         public ProfessorRepository()
         {
-            Host = Directory.GetCurrentDirectory() + @"\Database\professores.json";
+            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Database\professores.json";
         }
 
         public void Cadastrar(Professor professor)

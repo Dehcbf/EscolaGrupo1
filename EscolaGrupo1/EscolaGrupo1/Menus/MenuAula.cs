@@ -1,11 +1,6 @@
-﻿using EscolaGrupo1.Entities;
-using EscolaGrupo1.Professores.Service;
+﻿using EscolaGrupo1.Professores.Service;
 using EscolaGrupo1.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaGrupo1.Menus
 {
@@ -15,7 +10,7 @@ namespace EscolaGrupo1.Menus
         {
             var aulaService = new AulaService();
             var professorService = new ProfessorService();
-            
+
             Console.WriteLine("MENU DE AULA");
             Console.WriteLine("Escolha uma das opções...");
             Console.WriteLine("1. Visualizar Aulas");
@@ -45,7 +40,7 @@ namespace EscolaGrupo1.Menus
                     Console.WriteLine("Insira a matéria da aula: ");
                     var nomeMateria = Console.ReadLine();
                     var returnAulaId = aulaService.Cadastrar(nomeMateria);
-                    if(returnAulaId != Guid.Empty)
+                    if (returnAulaId != Guid.Empty)
                         Console.WriteLine($"Id da Aula: {returnAulaId}");
                     break;
                 case "3":
@@ -75,7 +70,6 @@ namespace EscolaGrupo1.Menus
                 default:
                     Console.WriteLine("Opção Inválida, tente novamente...");
                     Console.ReadLine();
-                    Menu();
                     break;
             }
             Menu();
